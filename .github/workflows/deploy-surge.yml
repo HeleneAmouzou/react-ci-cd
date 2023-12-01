@@ -5,7 +5,7 @@ on:
   push:
     branches:
       - main
-       #- dev
+      #- dev
 
 # définition des permissions et autorisation de permettre le déploiement sur GitHub Pages
 permissions:
@@ -19,7 +19,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  buildNdeploy: 
+  buidNdeploy:
     environment: production
     runs-on: ubuntu-latest
     defaults:
@@ -35,12 +35,12 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      # Build du projet (transpilation ts -> js, scss -> css, création du dossier dist)
+      # Build du projet (transpilation ts -> js, scss -> css)
       - name: Build
         run: npm run build
-      
+
       # Deploy to Surge
-      - name: Deploy to Surgegit 
+      - name: Deploy to Surge
         run: |
           npm install -g surge
-          surge ./dist --domain ${{ secrets.SURGE_DOMAIN }} --token ${{ secrets.SURGER_TOKEN }}
+          surge ./dist --domain ${{ secrets.SURGE_DOMAIN }} --token ${{ secrets.SURGE_TOKEN }}
