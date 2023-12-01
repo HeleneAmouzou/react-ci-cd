@@ -5,6 +5,7 @@ on:
   push:
     branches:
       - main
+       #- dev
 
 # définition des permissions et autorisation de permettre le déploiement sur GitHub Pages
 permissions:
@@ -22,8 +23,9 @@ jobs:
     environment: production
     runs-on: ubuntu-latest
     defaults:
-      shell: bash
-      working-directory: ./
+      run:
+        shell: bash
+        working-directory: ./
     steps:
       # Récupération du code du projet
       - name: Fetch code
@@ -37,6 +39,7 @@ jobs:
       - name: Build
         run: npm run build
       
+      # Deploy to Surge
       - name: Deploy to Surge
         run: |
           npm install -g surge
